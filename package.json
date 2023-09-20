@@ -1,6 +1,6 @@
 {
-  "name": "onewallet.library.idempotent",
-  "version": "1.1.6",
+  "name": "@layer2consulting/onewallet.library.idempotent",
+  "version": "0.1.0",
   "description": "",
   "main": "build/index.js",
   "directories": {
@@ -9,38 +9,58 @@
   "scripts": {
     "test": "mocha test/idempotent.spec.ts",
     "clean": "rimraf build/",
-    "build": "npm run clean && tsc --project tsconfig.json"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "build": "npm run clean && tsc --project tsconfig.json",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Proto-Garage/onewallet.library.idempotent.git"
+    "url": "git+https://github.com/layer2consulting/onewallet.library.idempotent.git"
   },
   "bugs": {
-    "url": "https://github.com/Proto-Garage/onewallet.library.idempotent/issues"
+    "url": "https://github.com/layer2consulting/onewallet.library.idempotent/issues"
   },
-  "homepage": "https://github.com/Proto-Garage/onewallet.library.idempotent#readme",
+  "homepage": "https://github.com/layer2consulting/onewallet.library.idempotent#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.6",
-    "@types/ramda": "^0.26.8",
-    "@types/sinon": "^7.0.11",
-    "chai": "^4.2.0",
-    "mocha": "^8.1.1",
-    "ramda": "^0.26.1",
-    "rimraf": "^2.6.3",
-    "sinon": "^7.3.2",
-    "ts-node": "^8.1.0",
+    "@types/chai": "^4.3.6",
+    "@types/mocha": "^10.0.1",
+    "@types/ramda": "^0.29.4",
+    "@types/sinon": "^10.0.16",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "chai": "^4.3.8",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "mocha": "^10.2.0",
+    "ramda": "^0.29.0",
+    "rimraf": "^5.0.1",
+    "sinon": "^16.0.0",
+    "ts-node": "^10.9.1",
     "tsconfig": "^7.0.0",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@types/backoff": "^2.5.1",
-    "@types/mongoose": "5.7.21",
-    "@types/ms": "^0.7.30",
+    "@types/backoff": "^2.5.3",
+    "@types/mongoose": "5.11.96",
+    "@types/ms": "^0.7.31",
     "backoff": "^2.5.0",
     "highoutput-utilities": "0.0.10",
-    "mongoose": "^5.5.10",
-    "ms": "^2.1.1"
+    "mongoose": "^7.5.2",
+    "ms": "^2.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run typecheck",
+      "pre-push": "npm run lint:fix"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

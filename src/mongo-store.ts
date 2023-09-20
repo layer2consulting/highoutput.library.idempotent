@@ -3,6 +3,7 @@ import { IdempotentStore, Request, RequestExistsError } from './idempotent';
 
 export class MongoStore implements IdempotentStore {
   private model: Model<Document & Request>;
+
   constructor(connection: Connection, expires: number = 3 * 24 * 60) {
     const schema = new Schema({
       _id: {
@@ -46,12 +47,12 @@ export class MongoStore implements IdempotentStore {
     request: string,
     params:
       | {
-        status: 'STARTED';
-      }
+          status: 'STARTED';
+        }
       | {
-        status: 'DONE';
-        result: any;
-      }
+          status: 'DONE';
+          result: any;
+        }
   ) {
     if (params.status === 'STARTED') {
       try {
@@ -59,7 +60,7 @@ export class MongoStore implements IdempotentStore {
           _id: request,
           ...params,
         });
-      } catch (err) {
+      } catch (err: any) {
         if (err.message.startsWith('E11000 duplicate key error collection')) {
           throw new RequestExistsError();
         }

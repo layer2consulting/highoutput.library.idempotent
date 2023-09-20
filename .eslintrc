@@ -1,0 +1,43 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import", "prettier", "no-only-tests"],
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-shadow": "off",
+    "no-redeclare": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    // Temporarily off
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-types": "off",
+    //-----
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "import/extensions": ["error", "never", { "packages": "always" }],
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "func-names": "off",
+    "max-classes-per-file": "off",
+    "max-len": ["error", 140],
+    "linebreak-style": ["error"],
+    "import/prefer-default-export": "off",
+    "prettier/prettier": "error",
+    "import/no-extraneous-dependencies": "off",
+    "no-only-tests/no-only-tests": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

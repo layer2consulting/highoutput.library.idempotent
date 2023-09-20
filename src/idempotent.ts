@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-useless-constructor */
 import { FibonacciStrategy, Backoff } from 'backoff';
 import { delay } from 'highoutput-utilities';
 
@@ -22,7 +24,8 @@ export type Request = {
   | {
       status: 'DONE';
       result: any;
-    });
+    }
+);
 
 export interface IdempotentStore {
   get(id: string): Promise<Request | null>;
@@ -54,6 +57,14 @@ export class Idempotent {
       }
 
       return new Promise((resolve, reject) => {
+        const backoff = new Backoff(
+          new FibonacciStrategy({
+            initialDelay: 1,
+            maxDelay: 100,
+            randomisationFactor: 0.5,
+          })
+        );
+
         const handler = async () => {
           const requestDocument = await this.store.get(request);
 
@@ -64,14 +75,6 @@ export class Idempotent {
 
           backoff.backoff();
         };
-
-        const backoff = new Backoff(
-          new FibonacciStrategy({
-            initialDelay: 1,
-            maxDelay: 100,
-            randomisationFactor: 0.5,
-          })
-        );
 
         backoff.on('backoff', handler);
 
@@ -90,5 +93,3 @@ export class Idempotent {
     return result;
   }
 }
-
-export default Idempotent;

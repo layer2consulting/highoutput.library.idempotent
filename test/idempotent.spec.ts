@@ -1,13 +1,14 @@
+/* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { delay } from 'highoutput-utilities';
 import R from 'ramda';
 
-import Idempotent, { RequestExistsError } from '../src/idempotent';
+import { RequestExistsError, Idempotent } from '../src/idempotent';
 
 const randomDelay = () => delay(5 + Math.random() * 20);
-describe('Idempotent', function() {
-  beforeEach(function() {
+describe('Idempotent', function () {
+  beforeEach(function () {
     this.store = {};
 
     this.idempotent = new Idempotent({
@@ -43,10 +44,10 @@ describe('Idempotent', function() {
   });
 
   describe('execute', () => {
-    it('should execute the function and store the result', async function() {
+    it('should execute the function and store the result', async function () {
       const handler = sinon.fake(async () => 'hello');
 
-      let result = await this.idempotent.execute(handler, '1');
+      const result = await this.idempotent.execute(handler, '1');
 
       expect(result).to.equal('hello');
       expect(this.store)
@@ -56,7 +57,7 @@ describe('Idempotent', function() {
     });
 
     describe('When executed multiple times at the same time', () => {
-      it('should run handler only once', async function() {
+      it('should run handler only once', async function () {
         const handler = sinon.fake(async () => 'hello');
 
         await Promise.all(
@@ -68,10 +69,10 @@ describe('Idempotent', function() {
     });
 
     describe('Given the handler returns a falsy', () => {
-      it('should execute handler', async function() {
+      it('should execute handler', async function () {
         const handler = sinon.fake(async () => null);
 
-        let result = await this.idempotent.execute(handler, '1');
+        const result = await this.idempotent.execute(handler, '1');
 
         expect(result).to.equal(null);
         expect(this.store)
