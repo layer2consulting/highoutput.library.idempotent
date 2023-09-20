@@ -1,0 +1,6 @@
+--timeout 30s
+--exit
+--colors
+--require ts-node/register
+--recursive
+--bail

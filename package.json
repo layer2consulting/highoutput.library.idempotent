@@ -1,0 +1,46 @@
+{
+  "name": "onewallet.library.idempotent",
+  "version": "1.1.6",
+  "description": "",
+  "main": "build/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/idempotent.spec.ts",
+    "clean": "rimraf build/",
+    "build": "npm run clean && tsc --project tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proto-Garage/onewallet.library.idempotent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Proto-Garage/onewallet.library.idempotent/issues"
+  },
+  "homepage": "https://github.com/Proto-Garage/onewallet.library.idempotent#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/ramda": "^0.26.8",
+    "@types/sinon": "^7.0.11",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1",
+    "ramda": "^0.26.1",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.3.2",
+    "ts-node": "^8.1.0",
+    "tsconfig": "^7.0.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@types/backoff": "^2.5.1",
+    "@types/mongoose": "5.7.21",
+    "@types/ms": "^0.7.30",
+    "backoff": "^2.5.0",
+    "highoutput-utilities": "0.0.10",
+    "mongoose": "^5.5.10",
+    "ms": "^2.1.1"
+  }
+}
